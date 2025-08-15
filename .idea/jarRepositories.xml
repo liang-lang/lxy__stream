@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteRepositoriesConfiguration">
+    <remote-repository>
+      <option name="id" value="d1ca3ac7-2797-4759-930a-736d98c4cac5" />
+      <option name="name" value="d1ca3ac7-2797-4759-930a-736d98c4cac5" />
+      <option name="url" value="https://maven.aliyun.com/nexus/content/groups/public" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="0207906f-64c8-495e-a2d4-543fcd4c5009" />
+      <option name="name" value="0207906f-64c8-495e-a2d4-543fcd4c5009" />
+      <option name="url" value="http://maven.aliyun.com/mvn/view" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="8a69b31c-c9b7-4867-b066-51741720dd8c" />
+      <option name="name" value="8a69b31c-c9b7-4867-b066-51741720dd8c" />
+      <option name="url" value="https://maven.aliyun.com/nexus/content/groups/public" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="07f40d64-bd5c-4f1d-be35-650efd77be09" />
+      <option name="name" value="07f40d64-bd5c-4f1d-be35-650efd77be09" />
+      <option name="url" value="http://maven.aliyun.com/nexus/content/repositories/central/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="f170d751-0c47-42c3-b173-fa628c51c00d" />
+      <option name="name" value="f170d751-0c47-42c3-b173-fa628c51c00d" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Maven Central repository" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="1023f1fa-8275-476b-9168-6a31c3082421" />
+      <option name="name" value="1023f1fa-8275-476b-9168-6a31c3082421" />
+      <option name="url" value="https://maven.aliyun.com/nexus/content/groups/public" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="d660a010-082b-4e16-a16c-4f28a1b9fc3e" />
+      <option name="name" value="d660a010-082b-4e16-a16c-4f28a1b9fc3e" />
+      <option name="url" value="https://repository.cloudera.com/artifactory/cloudera-repos" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="https://maven.aliyun.com/repository/public" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="884285fa-9bb3-4513-b149-293ab1192ab5" />
+      <option name="name" value="884285fa-9bb3-4513-b149-293ab1192ab5" />
+      <option name="url" value="https://maven.aliyun.com/nexus/content/groups/public" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="3347226d-9833-43be-a811-07e62b4d8b4a" />
+      <option name="name" value="3347226d-9833-43be-a811-07e62b4d8b4a" />
+      <option name="url" value="http://maven.aliyun.com/nexus/content/repositories/central/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="6f9bbbb9-7e8f-4efd-9fa9-e2ad857952b6" />
+      <option name="name" value="6f9bbbb9-7e8f-4efd-9fa9-e2ad857952b6" />
+      <option name="url" value="http://maven.aliyun.com/nexus/content/repositories/central/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="1fa71420-0679-4c9f-a9dc-655eb83fb06e" />
+      <option name="name" value="1fa71420-0679-4c9f-a9dc-655eb83fb06e" />
+      <option name="url" value="https://repository.cloudera.com/artifactory/cloudera-repos" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="3ef6f6e4-64ab-4b97-9a99-d3a850a61773" />
+      <option name="name" value="3ef6f6e4-64ab-4b97-9a99-d3a850a61773" />
+      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="58c2371d-ab91-477f-acce-b04395efc116" />
+      <option name="name" value="58c2371d-ab91-477f-acce-b04395efc116" />
+      <option name="url" value="https://repo.maven.apache.org/maven2/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="cloudera" />
+      <option name="name" value="cloudera" />
+      <option name="url" value="https://repository.cloudera.com/artifactory/cloudera-repos/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="9d7e7538-91c9-4b38-bc0a-a8c4d7174471" />
+      <option name="name" value="9d7e7538-91c9-4b38-bc0a-a8c4d7174471" />
+      <option name="url" value="https://repository.cloudera.com/artifactory/cloudera-repos/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="f86813df-b643-429c-aae7-92f585bd7a52" />
+      <option name="name" value="f86813df-b643-429c-aae7-92f585bd7a52" />
+      <option name="url" value="https://repo.maven.apache.org/maven2/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jboss.community" />
+      <option name="name" value="JBoss Community repository" />
+      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="https://maven.aliyun.com/nexus/content/groups/public" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="nexus-aliyun" />
+      <option name="name" value="Nexus aliyun" />
+      <option name="url" value="https://maven.aliyun.com/repository/public" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="5b3037e9-8d12-436f-83a0-c699413c7da2" />
+      <option name="name" value="5b3037e9-8d12-436f-83a0-c699413c7da2" />
+      <option name="url" value="https://repository.cloudera.com/artifactory/cloudera-repos" />
+    </remote-repository>
+  </component>
+</project>
