@@ -1,13 +1,11 @@
 package com.stream.common.utils;
 
-import cn.hutool.core.collection.CollectionUtil;
-import cn.hutool.crypto.SecureUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.google.common.collect.Lists;
-import com.stream.common.domain.HBaseInfo;
 import lombok.SneakyThrows;
-import org.apache.flink.api.java.tuple.Tuple3;
-import org.apache.hadoop.hbase.*;
+import org.apache.hadoop.hbase.CellUtil;
+import org.apache.hadoop.hbase.HBaseConfiguration;
+import org.apache.hadoop.hbase.HConstants;
+import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.filter.FirstKeyOnlyFilter;
 import org.apache.hadoop.hbase.io.compress.Compression;
@@ -16,11 +14,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.Executors;
-
-import static org.apache.hadoop.hbase.CellUtil.cloneQualifier;
-import static org.apache.hadoop.hbase.CellUtil.cloneValue;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * @author han.zhou
@@ -29,19 +26,19 @@ import static org.apache.hadoop.hbase.CellUtil.cloneValue;
  * @description HBase 工具类
  */
 public class HbaseUtils {
-    private Connection connection;
+    private final Connection connection;
     private static final Logger LOG = LoggerFactory.getLogger(HbaseUtils.class.getName());
 
     public HbaseUtils(String zookeeper_quorum) throws Exception {
         org.apache.hadoop.conf.Configuration entries = HBaseConfiguration.create();
         entries.set(HConstants.ZOOKEEPER_QUORUM, zookeeper_quorum);
         // setting hbase "hbase.rpc.timeout" and "hbase.client.scanner.timeout" Avoidance scan timeout
-        entries.set(HConstants.HBASE_RPC_TIMEOUT_KEY,"1800000");
-        entries.set(HConstants.HBASE_CLIENT_SCANNER_TIMEOUT_PERIOD,"1800000");
+        entries.set(HConstants.HBASE_RPC_TIMEOUT_KEY, "1800000");
+        entries.set(HConstants.HBASE_CLIENT_SCANNER_TIMEOUT_PERIOD, "1800000");
         // setting hbase "hbase.hregion.memstore.flush.size" buffer flush
-        entries.set(HConstants.HREGION_MEMSTORE_FLUSH_SIZE,"128M");
-        entries.set("hbase.incremental.wal","true");
-        entries.set(HConstants.HBASE_CLIENT_SCANNER_TIMEOUT_PERIOD,"3600000");
+        entries.set(HConstants.HREGION_MEMSTORE_FLUSH_SIZE, "128M");
+        entries.set("hbase.incremental.wal", "true");
+        entries.set(HConstants.HBASE_CLIENT_SCANNER_TIMEOUT_PERIOD, "3600000");
 //        entries.set(HConstants.HBASE_REGIONSERVER_LEASE_PERIOD_KEY,"1200000");
         this.connection = ConnectionFactory.createConnection(entries);
     }
@@ -58,20 +55,30 @@ public class HbaseUtils {
         mutator.mutate(put);
     }
 
-    public static void put(String rowKey, JSONObject value){
+    public static void put(String rowKey, JSONObject value) {
         Put put = new Put(Bytes.toBytes(rowKey));
         for (Map.Entry<String, Object> entry : value.entrySet()) {
             put.addColumn(Bytes.toBytes("info"), Bytes.toBytes(entry.getKey()), Bytes.toBytes(String.valueOf(entry.getValue())));
         }
     }
 
-    public boolean createTable(String nameSpace,String tableName, String... columnFamily) throws Exception {
+    @SneakyThrows
+    public static void main(String[] args) {
+        System.setProperty("HADOOP_USER_NAME", "root");
+        HbaseUtils hbaseUtils = new HbaseUtils("cdh01,cdh02,cdh03");
+//        hbaseUtils.dropHbaseNameSpace("GMALL_FLINK_2207");
+//        System.err.println(hbaseUtils.tableIsExists("realtime_v2:dim_user_info"));
+        hbaseUtils.deleteTable("ns_chenming:dim_activity_info");
+//        hbaseUtils.getHbaseNameSpaceAllTablesList("realtime_v2");
+    }
+
+    public boolean createTable(String nameSpace, String tableName, String... columnFamily) throws Exception {
         boolean b = tableIsExists(tableName);
         if (b) {
             return true;
         }
         Admin admin = connection.getAdmin();
-        TableDescriptorBuilder tableDescriptorBuilder = TableDescriptorBuilder.newBuilder(TableName.valueOf(nameSpace,tableName));
+        TableDescriptorBuilder tableDescriptorBuilder = TableDescriptorBuilder.newBuilder(TableName.valueOf(nameSpace, tableName));
         if (columnFamily.length > 0) {
             for (String s : columnFamily) {
                 ColumnFamilyDescriptor build = ColumnFamilyDescriptorBuilder.newBuilder(s.getBytes()).setCompressionType(Compression.Algorithm.SNAPPY).build();
@@ -87,7 +94,7 @@ public class HbaseUtils {
                 .build();
         admin.createTable(build);
         admin.close();
-        LOG.info("Create Table {}",tableName);
+        LOG.info("Create Table {}", tableName);
         return tableIsExists(tableName);
     }
 
@@ -98,17 +105,6 @@ public class HbaseUtils {
         admin.close();
         System.err.println("表 ：" + tableName + (b ? " 存在" : " 不存在"));
         return b;
-    }
-
-    public void getHbaseNameSpaceAllTablesList(String nameSpace) throws IOException {
-        Admin admin = connection.getAdmin();
-        TableName[] tableNamesByNamespace = admin.listTableNamesByNamespace(nameSpace);
-        ArrayList<TableName> tableNames = new ArrayList<>(Arrays.asList(tableNamesByNamespace));
-        if (!tableNames.isEmpty()){
-            for (TableName tableName : tableNames) {
-                System.err.println("table -> "+tableName);
-            }
-        }
     }
 
     public boolean deleteTable(String tableName) throws Exception {
@@ -131,8 +127,15 @@ public class HbaseUtils {
         return result.toString();
     }
 
-    public boolean isConnect() {
-        return !connection.isClosed();
+    public void getHbaseNameSpaceAllTablesList(String nameSpace) throws IOException {
+        Admin admin = connection.getAdmin();
+        TableName[] tableNamesByNamespace = admin.listTableNamesByNamespace(nameSpace);
+        ArrayList<TableName> tableNames = new ArrayList<>(Arrays.asList(tableNamesByNamespace));
+        if (!tableNames.isEmpty()) {
+            for (TableName tableName : tableNames) {
+                System.err.println("table -> " + tableName);
+            }
+        }
     }
 
     public ArrayList<JSONObject> getAll(String tableName, long limit) throws Exception {
@@ -179,6 +182,10 @@ public class HbaseUtils {
     }
 */
 
+    public boolean isConnect() {
+        return !connection.isClosed();
+    }
+
     public String getTableRows(String tableName) throws IOException {
         long rowCount = 0;
         long startTime = System.currentTimeMillis();
@@ -191,31 +198,21 @@ public class HbaseUtils {
             rowCount += r.size();
         }
         long stopTime = System.currentTimeMillis();
-        return "表 -> "+tableName + "共计: "+rowCount +" 条"+" , 统计耗时 -> "+(stopTime - startTime);
+        return "表 -> " + tableName + "共计: " + rowCount + " 条" + " , 统计耗时 -> " + (stopTime - startTime);
     }
 
     @SneakyThrows
-    public void dropHbaseNameSpace(String nameSpace){
+    public void dropHbaseNameSpace(String nameSpace) {
         Admin admin = connection.getAdmin();
         TableName[] tableNamesByNamespace = admin.listTableNamesByNamespace(nameSpace);
         ArrayList<TableName> tableNames = new ArrayList<>(Arrays.asList(tableNamesByNamespace));
-        if (!tableNames.isEmpty()){
+        if (!tableNames.isEmpty()) {
             for (TableName tableName : tableNames) {
                 Table table = connection.getTable(tableName);
                 admin.disableTable(table.getName());
                 admin.deleteTable(tableName);
-                System.err.println("del -> "+table.getName());
+                System.err.println("del -> " + table.getName());
             }
         }
-    }
-
-    @SneakyThrows
-    public static void main(String[] args) {
-        System.setProperty("HADOOP_USER_NAME","root");
-        HbaseUtils hbaseUtils = new HbaseUtils("cdh01,cdh02,cdh03");
-//        hbaseUtils.dropHbaseNameSpace("GMALL_FLINK_2207");
-//        System.err.println(hbaseUtils.tableIsExists("realtime_v2:dim_user_info"));
-        hbaseUtils.deleteTable("ns_zxn:dim_base_category1");
-//        hbaseUtils.getHbaseNameSpaceAllTablesList("realtime_v2");
     }
 }

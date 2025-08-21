@@ -3,19 +3,27 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/custom-func/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/custom-func/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/custom-func/src/main/scala" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/serverless-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/serverless-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/serverless-api/src/main/scala" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/scala" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/stream-common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/stream-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/stream-common/src/main/scala" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/stream-deploy/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/stream-deploy/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/stream-deploy/src/main/scala" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/stream-go/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/stream-go/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/stream-go/src/main/scala" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/stream-ml/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/stream-ml/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/stream-ml/src/main/scala" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/stream-realtime/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/stream-realtime/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/stream-realtime/src/main/scala" charset="UTF-8" />
   </component>
 </project>

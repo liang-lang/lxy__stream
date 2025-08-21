@@ -2,7 +2,6 @@ package com.stream.common.utils;
 
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.common.time.Time;
-import org.apache.flink.contrib.streaming.state.EmbeddedRocksDBStateBackend;
 import org.apache.flink.runtime.state.storage.FileSystemCheckpointStorage;
 import org.apache.flink.streaming.api.CheckpointingMode;
 import org.apache.flink.streaming.api.environment.CheckpointConfig;
@@ -30,10 +29,13 @@ public final class EnvironmentSettingUtils {
      * @param env
      */
     public static void defaultParameter(StreamExecutionEnvironment env) {
+        System.setProperty("HADOOP_USER_NAME", "root");
+
         // 开启 checkpoint 支持在 STREAMING 模式下的 FlinkSink 操作
         env.enableCheckpointing(1000 * 30);
+//        env.setParallelism(6);
         // 设置状态后端为 RocksDB
-        env.setStateBackend(new EmbeddedRocksDBStateBackend());
+//        env.setStateBackend(new EmbeddedRocksDBStateBackend());
         CheckpointConfig config = env.getCheckpointConfig();
         // 设定语义模式，默认情况是 exactly_once
         config.setCheckpointingMode(CheckpointingMode.EXACTLY_ONCE);
