@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 
 public class aaa {
     private static Connection dbConn = null;
-
     public static void main(String[] args) {
         String dbURL = "jdbc:sqlserver://cdh02:1433;database=realtime;trustServerCertificate=true;";//这里输入自己的数据库名称（即将Stu改为你自己的数据库名称）其余都可以不做修改
         try {
@@ -30,6 +29,5 @@ public class aaa {
             e.printStackTrace();
             System.out.println("连接数据库失败！");
         }
-
     }
 }
