@@ -47,7 +47,6 @@ public class MysqlCdcToKafkaWithUserVerification {
                 DATABASE_NAME + ".*", // 采集所有表
                 ConfigUtils.getString("mysql.user"),
                 ConfigUtils.getString("mysql.pwd"),
-                "5000-6000",
                 StartupOptions.earliest()
         );
 

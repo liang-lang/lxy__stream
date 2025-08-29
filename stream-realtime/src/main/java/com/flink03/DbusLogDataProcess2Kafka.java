@@ -1,4 +1,4 @@
-package com.retailersv;
+package com.flink03;
 
 import com.alibaba.fastjson.JSONObject;
 import com.retailersv.func.ProcessSplitStreamFunc;
@@ -22,7 +22,6 @@ import org.apache.flink.util.OutputTag;
 
 import java.util.Date;
 import java.util.HashMap;
-
 
 public class DbusLogDataProcess2Kafka {
 
@@ -59,6 +58,7 @@ public class DbusLogDataProcess2Kafka {
         );
 
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
         EnvironmentSettingUtils.defaultParameter(env);
         env.setStateBackend(new MemoryStateBackend());
 
@@ -88,7 +88,6 @@ public class DbusLogDataProcess2Kafka {
                 .name("convert_json_process");
 
         SideOutputDataStream<String> dirtyDS = processDS.getSideOutput(dirtyTag);
-        processDS.print();
         dirtyDS.print("dirtyDS -> ");
         dirtyDS.sinkTo(KafkaUtils.buildKafkaSink(kafka_botstrap_servers,kafka_dirty_topic))
                 .uid("sink_dirty_data_to_kafka")
@@ -149,7 +148,6 @@ public class DbusLogDataProcess2Kafka {
                 .uid("flag_stream_process")
                 .name("flag_stream_process");
 
-//        processTagDs.print();
         SideOutputDataStream<String> sideOutputErrDS = processTagDs.getSideOutput(errTag);
         SideOutputDataStream<String> sideOutputStartDS = processTagDs.getSideOutput(startTag);
         SideOutputDataStream<String> sideOutputDisplayTagDS = processTagDs.getSideOutput(displayTag);
@@ -168,9 +166,6 @@ public class DbusLogDataProcess2Kafka {
     }
 
     public static void SplitDs2kafkaTopicMsg(HashMap<String,DataStream<String>> dataStreamHashMap){
-
-
-        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
         dataStreamHashMap.get("errTag").sinkTo(KafkaUtils.buildKafkaSink(kafka_botstrap_servers,kafka_err_log))
                 .uid("sk_errMsg2Kafka")
@@ -197,10 +192,6 @@ public class DbusLogDataProcess2Kafka {
         dataStreamHashMap.get("displayTag").print("displayTag ->");
         dataStreamHashMap.get("actionTag").print("actionTag ->");
         dataStreamHashMap.get("page").print("page ->");
-
-
-
-
     }
 
 }

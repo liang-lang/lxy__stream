@@ -10,7 +10,7 @@ import java.util.Properties;
 
 public class CdcSourceUtils {
 
-    public static MySqlSource<String> getMySQLCdcSource(String database,String table,String username,String pwd,String serverId,StartupOptions model){
+    public static MySqlSource<String> getMySQLCdcSource(String database, String table, String username, String pwd, StartupOptions model){
         Properties debeziumProperties = new Properties();
         debeziumProperties.setProperty("database.connectionCharset", "UTF-8");
         debeziumProperties.setProperty("decimal.handling.mode","string");

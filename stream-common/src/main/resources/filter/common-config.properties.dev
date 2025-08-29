@@ -1,68 +1,45 @@
-env=dev
+#env=dev
 
 # MySQL 本地开发配置
 mysql.host=192.168.142.131
 mysql.port=3306
-mysql.url=jdbc:mysql://192.168.142.131:3306/stream_realtime?useSSL=false&serverTimezone=Asia/Shanghai
+mysql.url=jdbc:mysql://cdh01:3306/FlinkGd03?useSSL=false&serverTimezone=Asia/Shanghai
 mysql.timezone=Asia/Shanghai
-mysql.database=stream_realtime
+mysql.database=FlinkGd03
+mysql.databases.conf=realtime_v1_config
 mysql.user=root
 mysql.pwd=root
-mysql.databases.conf=realtime_v1_config
-# Redis 本地配置
-doris.fenodes=192.168.142.131:8031
-doris.username=root
-doris.password=
-doris.database=FlinkDws2Doris
 
-redis.host=192.168.142.131:8031
-redis.port=8031
-redis.user=root
+# Redis 本地配置
+redis.host=localhost
+redis.port=6379
+redis.user=
 redis.pwd=
 
 # Kafka 本地或开发环境配置（若本地没启动，可填测试集群地址）
-Kafka.bootstrap.servers=192.168.142.131:9092,192.168.142.132:9092,192.168.142.133:9092
-REALTIME.KAFKA.LOG.TOPIC=realtime_log_0819
+Kafka.bootstrap.servers=cdh01:9092,cdh02:9092,cdh03:9092
+REALTIME.KAFKA.LOG.TOPIC=flink_gd03_log
 kafka.dirty.topic=dirty_log
 kafka.err.log=err_log
 kafka.start.log=start_log
 kafka.display.log=display_log
 kafka.action.log=action_log
 kafka.page.topic=ods_page_log
-
-kafka.dwd.comment.info=dwd_comment_info
-kafka.dwd.cart.info=dwd_cart_info
-
-kafka.cdc.db.topic=mysql_cdc_to_kafka_0819
-
-# DWD 层 Kafka 主题配置
-kafka.dwd.start.topic=dwd_traffic_start
-kafka.dwd.page.topic=dwd_traffic_page
-kafka.dwd.action.topic=dwd_traffic_action
-kafka.dwd.display.topic=dwd_traffic_display
-kafka.dwd.err.topic=dwd_traffic_err
-kafka.dwd.order.detail.topic=dwd_trade_order_detail
-kafka.dwd.cart.add.topic=dwd_trade_cart_add
-kafka.dwd.order.cancel.topic=dwd_trade_order_cancel
-kafka.dwd.payment.success.topic=dwd_trade_order_payment_success
-kafka.dwd.refund.topic=dwd_trade_order_refund
-kafka.dwd.comment.info.topic=dwd_interaction_comment_info
-kafka.dwd.user.register.topic=dwd_user_register
-kafka.dwd.toolCoupon.get.topic=dwd_tool_coupon_get
-kafka.dwd.toolCoupon.use.topic=dwd_tool_coupon_use
+kafka.cdc.db.topic=ods_gd03_cdc
 
 
 # Zookeeper 本地配置
-zookeeper.server.host.list=192.168.142.128:2181
+zookeeper.server.host.list=cdh01:2181,cdh02:2181,cdh03:2181
 
-# HBase 本地配置
-hbase.namespace=map_create_hbase_dim_0814
+# Hbase
+hbase.namespace=default
 
-# 暂时不用的服务可留空或注释
-holo.endpoint=
-ali.key=
-ali.pwd=
+# Doris
+doris.fe.nodes=cdh01:8131,cdh02:8131,cdh03:8131
+doris.database=gmall2025_realtime
 
+# Hive
+hive.conf.dir=D:\idea\zh\lxy__stream\stream-realtime\src\main\resources
 
 # FlinkGd03  Flink 工单03项目
 # FlinkGd03 Ods
@@ -73,3 +50,4 @@ kafka.ods.order.pay.log.topic=FlinkGd03_ods_order_pay_log
 kafka.ods.search.log.topic=FlinkGd03_ods_search_log
 kafka.ods.page.click.log.topic=FlinkGd03_ods_page_click_log
 kafka.ods.crowd.attribute.log.topic=FlinkGd03_ods_crowd_attribute_log
+kafka.dwd.user.visit.detail=FlinkGd03_dwd_user_visit_detail
